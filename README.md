@@ -1,24 +1,57 @@
-# README
+# property-management-app-api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+## Built With
+- React
+- Ruby on Rails
+- PostgreSQL
 
-* Configuration
+## Getting Started
 
-* Database creation
+To get a local copy up and running follow these simple example steps.
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Setup
 
-* Deployment instructions
 
-* ...
+
+### Development Database
+
+
+
+### Install
+
+
+### Run
+
+
+
+### Test
+
+## Author
+
+👤 **Titus Muthomi**
+
+- GitHub: [@Kalunge](https://github.com/Kalunge)
+- Twitter: [@titus_muthomi](https://twitter.com/titus_muthomi)
+- LinkedIn: [Titus Muthomi](https://www.linkedin.com/in/muthomi-titus-295024181/)
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page]().
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- Microverse
+
+## License
+
+[MIT](./LICENSE)
