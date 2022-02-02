@@ -45,6 +45,8 @@ Should have the following attributes
 - block
 
 ## Tasks
+- Generate Models
+- Generate Controllers and routes
 - Create, Read, Delete and update Users
 - Create, Read, Delete and update Block
 - Create, Read, Delete and update Apartment
