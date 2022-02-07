@@ -1,5 +1,5 @@
 class Api::V1::TenantsController < ApplicationController
-  before_action :set_tenant, only: [:show, :update, :destroy]
+  before_action :set_tenant, only: %i[show update destroy]
 
   # GET /tenants
   def index
@@ -39,13 +39,14 @@ class Api::V1::TenantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tenant
-      @tenant = Tenant.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tenant_params
-      params.fetch(:tenant, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tenant
+    @tenant = Tenant.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tenant_params
+    params.fetch(:tenant, {})
+  end
 end
