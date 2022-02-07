@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.create!(name:"Titus Kalunge")
+
+User.first.blocks.create!(location:"Kikuyu")
+
+Block.first.apartments.create!(name:"Macom", location:"kikuyu", )

@@ -1,0 +1,3 @@
+class Tenant < ApplicationRecord
+  
+end

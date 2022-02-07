@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_07_135229) do
+ActiveRecord::Schema.define(version: 2022_02_07_143125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,10 +21,11 @@ ActiveRecord::Schema.define(version: 2022_02_07_135229) do
     t.boolean "vacant"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
     t.bigint "block_id", null: false
+    t.integer "rent"
+    t.bigint "tenant_id"
     t.index ["block_id"], name: "index_apartments_on_block_id"
-    t.index ["user_id"], name: "index_apartments_on_user_id"
+    t.index ["tenant_id"], name: "index_apartments_on_tenant_id"
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -48,6 +49,15 @@ ActiveRecord::Schema.define(version: 2022_02_07_135229) do
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
+  create_table "tenants", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "phone"
+    t.integer "deposit"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -55,7 +65,7 @@ ActiveRecord::Schema.define(version: 2022_02_07_135229) do
   end
 
   add_foreign_key "apartments", "blocks"
-  add_foreign_key "apartments", "users"
+  add_foreign_key "apartments", "tenants"
   add_foreign_key "blocks", "users"
   add_foreign_key "reservations", "apartments"
   add_foreign_key "reservations", "blocks"
