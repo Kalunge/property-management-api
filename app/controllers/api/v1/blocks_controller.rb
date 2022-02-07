@@ -1,4 +1,4 @@
-class BlocksController < ApplicationController
+class Api::V1::BlocksController < ApplicationController
   before_action :set_block, only: [:show, :update, :destroy]
 
   # GET /blocks
