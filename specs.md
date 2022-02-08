@@ -20,8 +20,13 @@ Should have the following attributes
 - email
 - password
 - admin
+
+#### 1. Tenants
+Should have the following attributes
+- name
+- email
 - rent
-- landlord/tenant
+- deposit
 
 #### 2. Block
   - name
@@ -35,8 +40,9 @@ Should have the following attributes
 #### 3. Apartment
 - name/number
 - vacant => bool
-- tenant => if booked
+- tenant => 
 - amenities []
+- rent
 
 #### 4. Reservations
 - visit date
@@ -91,7 +97,7 @@ Should have the following attributes
 - User Login
 - User Logout
   
-###### House
+###### Apartment
 - Get 
 - Create 
 - Update 
