@@ -10,7 +10,7 @@ class Api::V1::ApartmentsController < ApplicationController
 
   # GET /apartments/1
   def show
-    render json: @apartment
+    render json: ApartmentRepresenter.new(@apartment).as_json
   end
 
   # POST /apartments
