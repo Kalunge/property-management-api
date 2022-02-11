@@ -97,4 +97,15 @@ describe 'Apartments API', type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  describe "DELETE /apartments/:id" do
+    let!(:apartment_5) do
+    FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
+  end
+    it "Deletes an apartment based on given id" do
+      delete "/api/v1/apartments/#{apartment_5.id}"
+
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
