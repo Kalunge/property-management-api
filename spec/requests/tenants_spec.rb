@@ -22,18 +22,18 @@ describe 'API /tenants', type: :request do
     end
   end
 
-  describe "GET Tenants/:id" do
-    it "Gets a tenant based on id" do
+  describe 'GET Tenants/:id' do
+    it 'Gets a tenant based on id' do
       get "/api/v1/tenants/#{my_tenant.id}"
 
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq({
-                                                  'id' => my_tenant.id,
-                                                  'email' => my_tenant.email,
-                                                  'phone' => my_tenant.phone,
-                                                  'name' => my_tenant.name,
-                                                  'deposit' => my_tenant.deposit
-                                                })
+                                                'id' => my_tenant.id,
+                                                'email' => my_tenant.email,
+                                                'phone' => my_tenant.phone,
+                                                'name' => my_tenant.name,
+                                                'deposit' => my_tenant.deposit
+                                              })
     end
   end
 end
