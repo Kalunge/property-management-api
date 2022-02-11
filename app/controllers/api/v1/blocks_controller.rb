@@ -5,7 +5,7 @@ class Api::V1::BlocksController < ApplicationController
   def index
     @blocks = Block.all
 
-    render json: @blocks
+    render json: BlocksRepresenter.new(@blocks).as_json
   end
 
   # GET /blocks/1

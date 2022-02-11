@@ -16,7 +16,40 @@ describe 'Blocks API', type: :request do
       get '/api/v1/blocks'
 
       expect(response).to have_http_status(:success)
-      expect(JSON.parse(response.body)).to eq([])
+      expect(JSON.parse(response.body)).to eq([
+                                                {
+                                                  'id' => block_one.id,
+                                                  'location' => block_one.location,
+                                                  'name' => block_one.name,
+                                                  'owner' => user_one.name
+                                                },
+                                                {
+                                                  'id' => block_two.id,
+                                                  'location' => block_two.location,
+                                                  'name' => block_two.name,
+                                                  'owner' => user_one.name
+                                                },
+                                                {
+                                                  'id' => block_three.id,
+                                                  'location' => block_three.location,
+                                                  'name' => block_three.name,
+                                                  'owner' => user_one.name
+                                                }
+                                              ])
+    end
+  end
+
+  describe 'GET BLOCKS/:id' do
+    it 'Gets one block based on id' do
+      get "/api/v1/blocks/#{block_one.id}"
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)).to eq({
+                                                'id' => block_one.id,
+                                                'location' => block_one.location,
+                                                'name' => block_one.name,
+                                                'owner' => user_one.name
+                                              })
     end
   end
 end
