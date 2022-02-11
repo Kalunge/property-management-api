@@ -3,9 +3,9 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    users = User.all
 
-    render json: @users
+    render json: UsersRepresenter.new(users).as_json
   end
 
   # GET /users/1
