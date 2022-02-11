@@ -5,6 +5,7 @@ describe "Apartments API", type: :request do
   let!(:block) {FactoryBot.create(:block, name: 'Macom Apartments', location: 'KdFarmaco Kikuyu', user_id: user.id)}
   let!(:tenant) {FactoryBot.create(:tenant, name: "Bazenga Bazuu", email: "test@mail.com", deposit: 200)}
   let!(:apartment_1) {FactoryBot.create(:apartment, name:"12", vacant: true, block_id: block.id, location: "Kikuyu", rent: 15000)}
+  let!(:apartment_2) {FactoryBot.create(:apartment, name:"12 E", vacant: true, block_id: block.id, location: "Kikuyu", rent: 15000)}
   
   describe "GET /Apartments" do
     it "Gets all apartments" do
@@ -18,9 +19,30 @@ describe "Apartments API", type: :request do
         "block_name" => apartment_1.block.name,
         "location" => apartment_1.block.location,
         "rent" => apartment_1.rent
+      },
+      {
+        "door_number" => apartment_2.name,
+        "vacant" => apartment_2.vacant,
+        "block_name" => apartment_2.block.name,
+        "location" => apartment_2.block.location,
+        "rent" => apartment_2.rent
       }
       ])
+    end
+  end
 
+  describe "Get Apartments/:id" do
+    it "Returns apartment based on id" do
+      get "/api/v1/apartments/#{apartment_1.id}"
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)).to eq({
+        "door_number" => apartment_1.name,
+        "vacant" => apartment_1.vacant,
+        "block_name" => apartment_1.block.name,
+        "location" => apartment_1.block.location,
+        "rent" => apartment_1.rent
+      },)
 
     end
   end
