@@ -18,7 +18,7 @@ class Api::V1::TenantsController < ApplicationController
     @tenant = Tenant.new(tenant_params)
 
     if @tenant.save
-      render json: @tenant, status: :created
+      render json: TenantsRepresenter.new(@tenants).as_json, status: :created
     else
       render json: @tenant.errors, status: :unprocessable_entity
     end
