@@ -62,4 +62,12 @@ describe 'API /tenants', type: :request do
                                               })
     end
   end
+
+  describe "DELETE /tenants/:id" do
+    it "Deletes a tenant based on a given id" do
+      delete "/api/v1/tenants/#{my_tenant.id}"
+
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
