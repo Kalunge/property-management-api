@@ -51,5 +51,11 @@ describe 'Blocks API', type: :request do
                                                 'owner' => user_one.name
                                               })
     end
+
+    it "Does not crash when Id is not found" do
+      get "/api/v1/blocks/100"
+
+      expect(response).to have_http_status(:not_found)
+    end
   end
 end
