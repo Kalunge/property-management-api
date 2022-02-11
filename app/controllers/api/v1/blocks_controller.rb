@@ -18,7 +18,7 @@ class Api::V1::BlocksController < ApplicationController
     @block = Block.new(block_params)
 
     if @block.save
-      render json: @block, status: :created, location: @block
+      render json: @block, status: :created
     else
       render json: @block.errors, status: :unprocessable_entity
     end
@@ -49,6 +49,6 @@ class Api::V1::BlocksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def block_params
-    params.require(:block).permit(:name, :location)
+    params.require(:block).permit(:name, :location, :user_id)
   end
 end

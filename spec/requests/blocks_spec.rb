@@ -52,10 +52,20 @@ describe 'Blocks API', type: :request do
                                               })
     end
 
-    it "Does not crash when Id is not found" do
-      get "/api/v1/blocks/100"
+    it 'Does not crash when Id is not found' do
+      get '/api/v1/blocks/100'
 
       expect(response).to have_http_status(:not_found)
+    end
+  end
+
+  describe 'POST /blocks' do
+    it 'Creates a new block' do
+      expect do
+        post '/api/v1/blocks', params: { block: { name: 'Glory House', location: 'THogoto', user_id: user_one.id } }
+      end.to change { Block.count }
+
+      expect(response).to have_http_status(:created)
     end
   end
 end
