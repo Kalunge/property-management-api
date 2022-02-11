@@ -44,6 +44,22 @@ describe 'API /tenants', type: :request do
              params: { tenant: { name: 'Faith Muthoni', email: 'Faith@mail.com', phone: '0713266564',
                                  deposit: 12_000 } }
       end.to change {Tenant.count}
+      expect(response).to have_http_status(:created)
+    end
+  end
+
+  describe "PUT /tenants/:id" do
+    it "Updates and returns a tenant" do
+      put "/api/v1/tenants/#{my_tenant.id}", params: {tenant: {name: "Newest name"}}
+      expect(response).to have_http_status(:success)
+
+      expect(JSON.parse(response.body)).to eq({
+                                                'id' => my_tenant.id,
+                                                'email' => my_tenant.email,
+                                                'phone' => my_tenant.phone,
+                                                'name' => "Newest name",
+                                                'deposit' => my_tenant.deposit
+                                              })
     end
   end
 end
