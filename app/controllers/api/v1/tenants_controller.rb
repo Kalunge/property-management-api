@@ -27,7 +27,7 @@ class Api::V1::TenantsController < ApplicationController
   # PATCH/PUT /tenants/1
   def update
     if @tenant.update(tenant_params)
-      render json: @tenant
+      render json: TenantRepresenter.new(@tenant).as_json
     else
       render json: @tenant.errors, status: :unprocessable_entity
     end
