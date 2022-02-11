@@ -74,35 +74,35 @@ describe 'Apartments API', type: :request do
     end
   end
 
-  describe "PUT /apartments/:id" do
+  describe 'PUT /apartments/:id' do
     let!(:apartment_3) do
-    FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
-  end
-    it "Edits and returns apartment with new deatils" do
-      put "/api/v1/apartments/#{apartment_3.id}", params: {apartment: {name: "new name"}}
+      FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
+    end
+    it 'Edits and returns apartment with new deatils' do
+      put "/api/v1/apartments/#{apartment_3.id}", params: { apartment: { name: 'new name' } }
 
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq({
-          'door_number' => 'new name',
-          'vacant' => true,
-          'block_name' => apartment_3.block.name,
-          'location' => 'Kikuyu',
-          'rent' => 15_000
-        })
+                                                'door_number' => 'new name',
+                                                'vacant' => true,
+                                                'block_name' => apartment_3.block.name,
+                                                'location' => 'Kikuyu',
+                                                'rent' => 15_000
+                                              })
     end
 
-    it "Returns 404 and does not crush when id is invalid" do
-      put "/api/v1/apartments/20", params: {apartment: {name: "new name"}}
+    it 'Returns 404 and does not crush when id is invalid' do
+      put '/api/v1/apartments/20', params: { apartment: { name: 'new name' } }
 
       expect(response).to have_http_status(:not_found)
     end
   end
 
-  describe "DELETE /apartments/:id" do
+  describe 'DELETE /apartments/:id' do
     let!(:apartment_5) do
-    FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
-  end
-    it "Deletes an apartment based on given id" do
+      FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
+    end
+    it 'Deletes an apartment based on given id' do
       delete "/api/v1/apartments/#{apartment_5.id}"
 
       expect(response).to have_http_status(:success)
