@@ -44,7 +44,7 @@ describe 'Apartments API', type: :request do
                                                 'door_number' => apartment_1.name,
                                                 'vacant' => apartment_1.vacant,
                                                 'block_name' => apartment_1.block.name,
-                                                'location' => apartment_1.block.location,
+                                                'location' => apartment_1.location,
                                                 'rent' => apartment_1.rent
                                               })
     end

@@ -49,7 +49,7 @@ describe 'Users API', type: :request do
 
       expect(response).to have_http_status(:created)
       expect(JSON.parse(response.body)).to eq({
-                                                'id' => 9,
+                                                'id' => 21,
                                                 'name' => 'Eric Muthomi'
                                               })
     end
