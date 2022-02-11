@@ -10,7 +10,7 @@ class Api::V1::BlocksController < ApplicationController
 
   # GET /blocks/1
   def show
-    render json: @block
+    render json: BlockRepresenter.new(@block).as_json
   end
 
   # POST /blocks
