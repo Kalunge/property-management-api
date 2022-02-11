@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 describe 'API /tenants', type: :request do
-  let!(:my_tenant) { FactoryBot.create(:tenant, name: 'Titus Kalunge', email: 'tenant@mail.com', phone: "254713398918", deposit: 180_000) }
+  let!(:my_tenant) do
+    FactoryBot.create(:tenant, name: 'Titus Kalunge', email: 'tenant@mail.com', phone: '254713398918', deposit: 180_000)
+  end
 
   describe 'GET /Tenants' do
     it 'Gets all tenants' do
@@ -17,6 +19,21 @@ describe 'API /tenants', type: :request do
                                                   'deposit' => my_tenant.deposit
                                                 }
                                               ])
+    end
+  end
+
+  describe "GET Tenants/:id" do
+    it "Gets a tenant based on id" do
+      get "/api/v1/tenants/#{my_tenant.id}"
+
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)).to eq({
+                                                  'id' => my_tenant.id,
+                                                  'email' => my_tenant.email,
+                                                  'phone' => my_tenant.phone,
+                                                  'name' => my_tenant.name,
+                                                  'deposit' => my_tenant.deposit
+                                                })
     end
   end
 end
