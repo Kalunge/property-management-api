@@ -5,7 +5,7 @@ class Api::V1::TenantsController < ApplicationController
   def index
     @tenants = Tenant.all
 
-    render json: @tenants
+    render json: TenantsRepresenter.new(@tenants).as_json
   end
 
   # GET /tenants/1

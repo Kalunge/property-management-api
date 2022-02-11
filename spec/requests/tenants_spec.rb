@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'API /tenants', type: :request do
-  let!(:my_tenant) { FactoryBot.create(:tenant, name: 'Titus Kalunge', email: 'tenant@mail.com', deposit: 180_000) }
+  let!(:my_tenant) { FactoryBot.create(:tenant, name: 'Titus Kalunge', email: 'tenant@mail.com', phone: "254713398918", deposit: 180_000) }
 
   describe 'GET /Tenants' do
     it 'Gets all tenants' do
