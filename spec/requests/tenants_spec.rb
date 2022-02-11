@@ -36,4 +36,14 @@ describe 'API /tenants', type: :request do
                                               })
     end
   end
+
+  describe 'CREATE /tenants' do
+    it 'Creates and returns a new Tenant' do
+      expect do
+        post '/api/v1/tenants',
+             params: { tenant: { name: 'Faith Muthoni', email: 'Faith@mail.com', phone: '0713266564',
+                                 deposit: 12_000 } }
+      end.to change {Tenant.count}
+    end
+  end
 end

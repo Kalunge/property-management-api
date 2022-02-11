@@ -18,7 +18,7 @@ class Api::V1::TenantsController < ApplicationController
     @tenant = Tenant.new(tenant_params)
 
     if @tenant.save
-      render json: @tenant, status: :created, location: @tenant
+      render json: @tenant, status: :created
     else
       render json: @tenant.errors, status: :unprocessable_entity
     end
@@ -47,6 +47,6 @@ class Api::V1::TenantsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def tenant_params
-    params.fetch(:tenant, {})
+    params.require(:tenant).permit(:name, :email, :phone, :deposit)
   end
 end
