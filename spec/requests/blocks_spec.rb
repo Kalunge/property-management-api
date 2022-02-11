@@ -63,7 +63,7 @@ describe 'Blocks API', type: :request do
     it 'Creates a new block' do
       expect do
         post '/api/v1/blocks', params: { block: { name: 'Glory House', location: 'THogoto', user_id: user_one.id } }
-      end.to change { Block.count }
+      end.to change { Block.count }.from(3).to(4)
 
       expect(response).to have_http_status(:created)
     end

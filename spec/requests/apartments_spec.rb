@@ -4,10 +4,10 @@ describe 'Apartments API', type: :request do
   let!(:user) { FactoryBot.create(:user, name: 'Grace Acibi') }
   let!(:block) { FactoryBot.create(:block, name: 'Macom Apartments', location: 'KdFarmaco Kikuyu', user_id: user.id) }
   let!(:tenant) { FactoryBot.create(:tenant, name: 'Bazenga Bazuu', email: 'test@mail.com', deposit: 200) }
-  let!(:apartment_1) do
+  let!(:apartmentone) do
     FactoryBot.create(:apartment, name: '12', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
   end
-  let!(:apartment_2) do
+  let!(:apartmenttwo) do
     FactoryBot.create(:apartment, name: '12 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
   end
 
@@ -18,18 +18,18 @@ describe 'Apartments API', type: :request do
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq([
                                                 {
-                                                  'door_number' => apartment_1.name,
-                                                  'vacant' => apartment_1.vacant,
-                                                  'block_name' => apartment_1.block.name,
-                                                  'location' => apartment_1.block.location,
-                                                  'rent' => apartment_1.rent
+                                                  'door_number' => apartmentone.name,
+                                                  'vacant' => apartmentone.vacant,
+                                                  'block_name' => apartmentone.block.name,
+                                                  'location' => apartmentone.block.location,
+                                                  'rent' => apartmentone.rent
                                                 },
                                                 {
-                                                  'door_number' => apartment_2.name,
-                                                  'vacant' => apartment_2.vacant,
-                                                  'block_name' => apartment_2.block.name,
-                                                  'location' => apartment_2.block.location,
-                                                  'rent' => apartment_2.rent
+                                                  'door_number' => apartmenttwo.name,
+                                                  'vacant' => apartmenttwo.vacant,
+                                                  'block_name' => apartmenttwo.block.name,
+                                                  'location' => apartmenttwo.block.location,
+                                                  'rent' => apartmenttwo.rent
                                                 }
                                               ])
     end
@@ -37,15 +37,15 @@ describe 'Apartments API', type: :request do
 
   describe 'Get Apartments/:id' do
     it 'Returns apartment based on id' do
-      get "/api/v1/apartments/#{apartment_1.id}"
+      get "/api/v1/apartments/#{apartmentone.id}"
 
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq({
-                                                'door_number' => apartment_1.name,
-                                                'vacant' => apartment_1.vacant,
-                                                'block_name' => apartment_1.block.name,
-                                                'location' => apartment_1.location,
-                                                'rent' => apartment_1.rent
+                                                'door_number' => apartmentone.name,
+                                                'vacant' => apartmentone.vacant,
+                                                'block_name' => apartmentone.block.name,
+                                                'location' => apartmentone.location,
+                                                'rent' => apartmentone.rent
                                               })
     end
   end
@@ -75,17 +75,17 @@ describe 'Apartments API', type: :request do
   end
 
   describe 'PUT /apartments/:id' do
-    let!(:apartment_3) do
+    let!(:apartmentthree) do
       FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
     end
     it 'Edits and returns apartment with new deatils' do
-      put "/api/v1/apartments/#{apartment_3.id}", params: { apartment: { name: 'new name' } }
+      put "/api/v1/apartments/#{apartmentthree.id}", params: { apartment: { name: 'new name' } }
 
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq({
                                                 'door_number' => 'new name',
                                                 'vacant' => true,
-                                                'block_name' => apartment_3.block.name,
+                                                'block_name' => apartmentthree.block.name,
                                                 'location' => 'Kikuyu',
                                                 'rent' => 15_000
                                               })
@@ -99,11 +99,11 @@ describe 'Apartments API', type: :request do
   end
 
   describe 'DELETE /apartments/:id' do
-    let!(:apartment_5) do
+    let!(:apartment_five) do
       FactoryBot.create(:apartment, name: '15 E', vacant: true, block_id: block.id, location: 'Kikuyu', rent: 15_000)
     end
     it 'Deletes an apartment based on given id' do
-      delete "/api/v1/apartments/#{apartment_5.id}"
+      delete "/api/v1/apartments/#{apartment_five.id}"
 
       expect(response).to have_http_status(:success)
     end

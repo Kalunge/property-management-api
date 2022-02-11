@@ -43,7 +43,7 @@ describe 'API /tenants', type: :request do
         post '/api/v1/tenants',
              params: { tenant: { name: 'Faith Muthoni', email: 'Faith@mail.com', phone: '0713266564',
                                  deposit: 12_000 } }
-      end.to change { Tenant.count }
+      end.to change { Tenant.count }.from(1).to(2)
       expect(response).to have_http_status(:created)
     end
   end
@@ -63,8 +63,8 @@ describe 'API /tenants', type: :request do
     end
   end
 
-  describe "DELETE /tenants/:id" do
-    it "Deletes a tenant based on a given id" do
+  describe 'DELETE /tenants/:id' do
+    it 'Deletes a tenant based on a given id' do
       delete "/api/v1/tenants/#{my_tenant.id}"
 
       expect(response).to have_http_status(:success)
