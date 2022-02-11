@@ -6,7 +6,7 @@ class ApartmentsRepresenter
   def as_json
     apartments.map do | apartment |
       {
-        name: apartment.name,
+        door_number: apartment.name,
         vacant: apartment.vacant,
         block_name: apartment.block.name,
         location: apartment.block.location,

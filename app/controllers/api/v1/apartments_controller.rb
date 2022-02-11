@@ -5,7 +5,7 @@ class Api::V1::ApartmentsController < ApplicationController
   def index
     @apartments = Apartment.all
 
-    render json: @apartments
+    render json: ApartmentsRepresenter.new(@apartments).as_json
   end
 
   # GET /apartments/1
