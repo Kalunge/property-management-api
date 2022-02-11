@@ -73,4 +73,14 @@ describe 'Users API', type: :request do
       })
     end
   end
+
+  describe "DELETE /users/id" do
+    let!(:to_be_deleted) {FactoryBot.create(:user, name: "Deleted user")}
+    it "Deletes a user" do
+      expect {
+        delete "/api/v1/users/#{to_be_deleted.id}"
+      }.to change {User.count}.from(3).to(2)
+      expect(response).to have_http_status(:success)
+    end
+  end
 end
