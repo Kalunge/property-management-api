@@ -10,7 +10,7 @@ class Api::V1::TenantsController < ApplicationController
 
   # GET /tenants/1
   def show
-    render json: @tenant
+    render json: TenantRepresenter.new(@tenant).as_json
   end
 
   # POST /tenants
