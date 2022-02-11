@@ -27,7 +27,7 @@ class Api::V1::BlocksController < ApplicationController
   # PATCH/PUT /blocks/1
   def update
     if @block.update(block_params)
-      render json: @block
+      render json: BlockRepresenter.new(@block).as_json
     else
       render json: @block.errors, status: :unprocessable_entity
     end
