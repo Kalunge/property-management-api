@@ -54,5 +54,11 @@ describe 'Users API', type: :request do
       })
     end
 
+    it "Rescues from Params missing error" do
+      post '/api/v1/users', params: {}
+
+      expect(response).to have_http_status(:bad_request)
+    end
+
   end
 end
