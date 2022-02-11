@@ -1,6 +1,8 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
+  
+
   # GET /users
   def index
     users = User.all
@@ -11,6 +13,7 @@ class Api::V1::UsersController < ApplicationController
   # GET /users/1
   def show
     render json: @user
+  
   end
 
   # POST /users
@@ -43,6 +46,8 @@ class Api::V1::UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
