@@ -5,12 +5,12 @@ class Api::V1::TenantsController < ApplicationController
   def index
     @tenants = Tenant.all
 
-    render json: @tenants
+    render json: TenantsRepresenter.new(@tenants).as_json
   end
 
   # GET /tenants/1
   def show
-    render json: @tenant
+    render json: TenantRepresenter.new(@tenant).as_json
   end
 
   # POST /tenants
@@ -18,7 +18,7 @@ class Api::V1::TenantsController < ApplicationController
     @tenant = Tenant.new(tenant_params)
 
     if @tenant.save
-      render json: @tenant, status: :created, location: @tenant
+      render json: TenantRepresenter.new(@tenant).as_json, status: :created
     else
       render json: @tenant.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::TenantsController < ApplicationController
   # PATCH/PUT /tenants/1
   def update
     if @tenant.update(tenant_params)
-      render json: @tenant
+      render json: TenantRepresenter.new(@tenant).as_json
     else
       render json: @tenant.errors, status: :unprocessable_entity
     end
@@ -43,10 +43,12 @@ class Api::V1::TenantsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_tenant
     @tenant = Tenant.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
   def tenant_params
-    params.fetch(:tenant, {})
+    params.require(:tenant).permit(:name, :email, :phone, :deposit)
   end
 end

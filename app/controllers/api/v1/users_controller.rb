@@ -3,9 +3,9 @@ class Api::V1::UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    users = User.all
 
-    render json: @users
+    render json: UsersRepresenter.new(users).as_json
   end
 
   # GET /users/1
@@ -18,16 +18,18 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: @user
+      render json: UserRepresenter.new(@user).as_json, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
+  rescue ActionController::ParameterMissing
+    render json: { message: 'Do not leave blank fields' }, status: :bad_request
   end
 
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: UserRepresenter.new(@user).as_json
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -43,10 +45,12 @@ class Api::V1::UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.fetch(:user, {})
+    params.require(:user).permit(:name)
   end
 end

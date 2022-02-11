@@ -5,12 +5,12 @@ class Api::V1::BlocksController < ApplicationController
   def index
     @blocks = Block.all
 
-    render json: @blocks
+    render json: BlocksRepresenter.new(@blocks).as_json
   end
 
   # GET /blocks/1
   def show
-    render json: @block
+    render json: BlockRepresenter.new(@block).as_json
   end
 
   # POST /blocks
@@ -18,7 +18,7 @@ class Api::V1::BlocksController < ApplicationController
     @block = Block.new(block_params)
 
     if @block.save
-      render json: @block, status: :created, location: @block
+      render json: @block, status: :created
     else
       render json: @block.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class Api::V1::BlocksController < ApplicationController
   # PATCH/PUT /blocks/1
   def update
     if @block.update(block_params)
-      render json: @block
+      render json: BlockRepresenter.new(@block).as_json
     else
       render json: @block.errors, status: :unprocessable_entity
     end
@@ -43,10 +43,12 @@ class Api::V1::BlocksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_block
     @block = Block.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
   def block_params
-    params.fetch(:block, {})
+    params.require(:block).permit(:name, :location, :user_id)
   end
 end
