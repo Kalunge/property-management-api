@@ -82,4 +82,14 @@ describe 'Blocks API', type: :request do
                                                 })
     end
   end
+
+  describe "DELETE /blocks/:id" do
+    it "Deletes a block based on provided id" do
+      expect {
+        delete "/api/v1/blocks/#{block_one.id}"
+
+      }.to change {Block.count}.from(3).to(2)
+
+    end
+  end
 end
