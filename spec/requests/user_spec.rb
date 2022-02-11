@@ -41,4 +41,18 @@ describe 'Users API', type: :request do
       end
     end
   end
+
+  describe "Post Creates a User" do
+    it "Creates and returns the newly created user" do 
+      expect {
+        post '/api/v1/users', params: { user: { name: "Eric Muthomi" }}
+      }.to change {User.count}
+      expect(response).to have_http_status(:created) 
+      expect(JSON.parse(response.body)).to eq({
+        "id" => 3,
+        "name" => "Eric Muthomi"
+      })
+    end
+
+  end
 end
