@@ -9,4 +9,4 @@
 users = User.create!([{name:"Titus Kalunge"}, {name:"ERick MUtembei"}])
 blocks = Block.create!([{name:"Macom Apartments", location:"KIdfarmamco", user:User.first}, {name:"Waringa Apartments", location:"KIdfarmamco", user:User.second}, {name:"Glory House Apartments", location:"KIdfarmamco", user:User.second}, {name:"Sironi Apartments", location:"KIdfarmamco", user:User.second}])
 tenants = Tenant.create!([{name:"Titus Kalunge", email:"tenant@mail.com", deposit:180000}, {name:"Eric Mungwwana", email:"mungs@mail.com", deposit:180000}])
-apartments = Apartment.create!([{name:"12", vacant:false, block: Block.first, rent:15000, tenant: Tenant.first}, {name:"6AB", vacant:true, block: Block.second, rent:15000}])
+apartments = Apartment.create!([{name:"12", vacant:false, block: Block.first, rent:15000, tenant: Tenant.first, location: "Kikuyu"}, {name:"6AB", vacant:true, block: Block.second, rent:15000, location: "Kikuyu"}])

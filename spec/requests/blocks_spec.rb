@@ -69,27 +69,24 @@ describe 'Blocks API', type: :request do
     end
   end
 
-  describe "PUT /blocks/:id" do
-    
-    it "Updates and returns block with new details" do
-      put "/api/v1/blocks/#{block_three.id}", params: {block: {name: "New name"}}
+  describe 'PUT /blocks/:id' do
+    it 'Updates and returns block with new details' do
+      put "/api/v1/blocks/#{block_three.id}", params: { block: { name: 'New name' } }
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq({
-                                                  'id' => block_three.id,
-                                                  'location' => block_three.location,
-                                                  'name' => "New name",
-                                                  'owner' => user_one.name
-                                                })
+                                                'id' => block_three.id,
+                                                'location' => block_three.location,
+                                                'name' => 'New name',
+                                                'owner' => user_one.name
+                                              })
     end
   end
 
-  describe "DELETE /blocks/:id" do
-    it "Deletes a block based on provided id" do
-      expect {
+  describe 'DELETE /blocks/:id' do
+    it 'Deletes a block based on provided id' do
+      expect do
         delete "/api/v1/blocks/#{block_one.id}"
-
-      }.to change {Block.count}.from(3).to(2)
-
+      end.to change { Block.count }.from(3).to(2)
     end
   end
 end
