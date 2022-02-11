@@ -1,8 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
-  
-
   # GET /users
   def index
     users = User.all
@@ -13,13 +11,11 @@ class Api::V1::UsersController < ApplicationController
   # GET /users/1
   def show
     render json: @user
-  
   end
 
   # POST /users
   def create
     @user = User.new(user_params)
-  
 
     if @user.save
       render json: UserRepresenter.new(@user).as_json, status: :created
@@ -27,7 +23,7 @@ class Api::V1::UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
   rescue ActionController::ParameterMissing
-    render json: {message:"Do not leave blank fields"}, status: :bad_request
+    render json: { message: 'Do not leave blank fields' }, status: :bad_request
   end
 
   # PATCH/PUT /users/1

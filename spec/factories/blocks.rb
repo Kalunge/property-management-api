@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :block do
     # TODO: Addsamples
   end
 end

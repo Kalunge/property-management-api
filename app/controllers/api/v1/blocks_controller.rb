@@ -47,6 +47,6 @@ class Api::V1::BlocksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def block_params
-    params.fetch(:block, {})
+    params.require(:block).permit(:name, :location)
   end
 end
