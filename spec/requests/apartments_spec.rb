@@ -90,5 +90,11 @@ describe 'Apartments API', type: :request do
           'rent' => 15_000
         })
     end
+
+    it "Returns 404 and does not crush when id is invalid" do
+      put "/api/v1/apartments/20", params: {apartment: {name: "new name"}}
+
+      expect(response).to have_http_status(:not_found)
+    end
   end
 end
