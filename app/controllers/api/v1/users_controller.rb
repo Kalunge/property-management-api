@@ -33,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: UserRepresenter.new(@user).as_json
     else
       render json: @user.errors, status: :unprocessable_entity
     end

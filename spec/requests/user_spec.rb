@@ -61,4 +61,16 @@ describe 'Users API', type: :request do
     end
 
   end
+
+  describe "Put /users" do
+    let(:edit_user) {FactoryBot.create(:user, name: "My old name")}
+    it "edits a selected user" do
+      put "/api/v1/users/#{edit_user.id}", params: {user: {name: "my new name"}}
+      expect(response).to have_http_status(:success)
+      expect(JSON.parse(response.body)).to eq({
+        "id" => edit_user.id,
+        "name" => "my new name"
+      })
+    end
+  end
 end
