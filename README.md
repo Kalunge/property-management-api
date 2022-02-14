@@ -43,7 +43,7 @@ To get a local copy up and running follow these simple example steps.
 
 
 ### Development Database
-- ``` rails db:reset
+- ``` rails db:reset ```
 
 ### Install
 - ``` bundle install ```
