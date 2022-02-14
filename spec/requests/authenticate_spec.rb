@@ -5,7 +5,7 @@ describe 'API Authenticate', type: :request do
 
   describe 'post /authenticate' do
     it 'takes a username and returns a token' do
-      post '/api/v1/authenticate', params: { name: user.name, password: "qwerty" }
+      post '/api/v1/authenticate', params: { name: user.name, password: 'qwerty' }
 
       expect(response).to have_http_status(:created)
       expect(JSON.parse(response.body)).to eq({
@@ -39,7 +39,5 @@ describe 'API Authenticate', type: :request do
                                                 'errors' => 'Wrong Email or password'
                                               })
     end
-
-    
   end
 end

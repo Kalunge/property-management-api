@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Apartments API', type: :request do
-  let!(:user) { FactoryBot.create(:user, name: 'Grace Acibi', password: "qwerty") }
+  let!(:user) { FactoryBot.create(:user, name: 'Grace Acibi', password: 'qwerty') }
   let!(:block) { FactoryBot.create(:block, name: 'Macom Apartments', location: 'KdFarmaco Kikuyu', user_id: user.id) }
   let!(:tenant) { FactoryBot.create(:tenant, name: 'Bazenga Bazuu', email: 'test@mail.com', deposit: 200) }
   let!(:apartmentone) do
