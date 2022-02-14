@@ -49,7 +49,7 @@ describe 'Users API', type: :request do
 
       expect(response).to have_http_status(:created)
       expect(JSON.parse(response.body)).to eq({
-                                                'id' => 9,
+                                                'id' => 24,
                                                 'name' => 'Eric Muthomi'
                                               })
     end
@@ -80,6 +80,12 @@ describe 'Users API', type: :request do
         delete "/api/v1/users/#{to_be_deleted.id}", headers: {"Authorization" => "Bearer #{AuthenticationTokenService.encode(user.id)}"}
       end.to change { User.count }.from(3).to(2)
       expect(response).to have_http_status(:success)
+    end
+
+    it "Returns when token is nil" do
+      delete "/api/v1/users/#{to_be_deleted.id}", headers:  {}
+
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end

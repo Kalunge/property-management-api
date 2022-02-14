@@ -39,5 +39,7 @@ describe 'API Authenticate', type: :request do
                                                 'errors' => 'Wrong Email or password'
                                               })
     end
+
+    
   end
 end
