@@ -21,6 +21,6 @@ class Api::V1::AuthenticateController < ApplicationController
   end
 
   def handle_unauthenticated
-    render json: { errors: 'Wrong Email or password' }, status: :unprocessable_entity
+    render json: { errors: 'Wrong Email or password' }, status: :unauthorized
   end
 end

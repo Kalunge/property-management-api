@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'Users API', type: :request do
-  let!(:user1) { FactoryBot.create(:user, name: 'Kalunge') }
-  let!(:user) { FactoryBot.create(:user, name: 'Titus Muthomi') }
+  let!(:user1) { FactoryBot.create(:user, name: 'Kalunge', password: "qwerty") }
+  let!(:user) { FactoryBot.create(:user, name: 'Titus Muthomi', password: "qwerty") }
   describe 'Get Users' do
     it 'Gets all Users' do
       get '/api/v1/users'
@@ -44,12 +44,12 @@ describe 'Users API', type: :request do
   describe 'Post Creates a User' do
     it 'Creates and returns the newly created user' do
       expect do
-        post '/api/v1/users', params: { user: { name: 'Eric Muthomi' } }
+        post '/api/v1/users', params: { user: { name: 'Eric Muthomi' , password: "qwerty"} }
       end.to change { User.count }.from(2).to(3)
 
       expect(response).to have_http_status(:created)
       expect(JSON.parse(response.body)).to eq({
-                                                'id' => 21,
+                                                'id' => 9,
                                                 'name' => 'Eric Muthomi'
                                               })
     end
@@ -62,9 +62,9 @@ describe 'Users API', type: :request do
   end
 
   describe 'Put /users' do
-    let(:edit_user) { FactoryBot.create(:user, name: 'My old name') }
+    let(:edit_user) { FactoryBot.create(:user, name: 'My old name', password: "qwerty") }
     it 'edits a selected user' do
-      put "/api/v1/users/#{edit_user.id}", params: { user: { name: 'my new name' } }
+      put "/api/v1/users/#{edit_user.id}", params: { user: { name: 'my new name' , password: "qwerty"} }
       expect(response).to have_http_status(:success)
       expect(JSON.parse(response.body)).to eq({
                                                 'id' => edit_user.id,
@@ -74,10 +74,10 @@ describe 'Users API', type: :request do
   end
 
   describe 'DELETE /users/id' do
-    let!(:to_be_deleted) { FactoryBot.create(:user, name: 'Deleted user') }
+    let!(:to_be_deleted) { FactoryBot.create(:user, name: 'Deleted user', password: "qwerty") }
     it 'Deletes a user' do
       expect do
-        delete "/api/v1/users/#{to_be_deleted.id}"
+        delete "/api/v1/users/#{to_be_deleted.id}", headers: {"Authorization" => "Bearer #{AuthenticationTokenService.encode(user.id)}"}
       end.to change { User.count }.from(3).to(2)
       expect(response).to have_http_status(:success)
     end

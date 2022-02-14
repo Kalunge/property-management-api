@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Blocks API', type: :request do
-  let!(:user_one) { FactoryBot.create(:user, name: 'Grace Acibi') }
+  let!(:user_one) { FactoryBot.create(:user, name: 'Grace Acibi', password: "qwerty") }
   let!(:block_one) do
     FactoryBot.create(:block, name: 'Macom Apartments', location: 'KdFarmaco Kikuyu', user_id: user_one.id)
   end
