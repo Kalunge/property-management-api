@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "API Authenticate", type: :request do
-  let(:user) { FactoryBot.create(:user, name: 'Kalungez') }
+  let(:user) { FactoryBot.create(:user, name: 'Kalungez', password: "qwerty") }
 
   describe "post /authenticate" do
     it "takes a username and returns a token" do
