@@ -28,6 +28,7 @@ I believe in building a product incrementally and keep adding features so as to 
  - IMplement Payment(stripe, Paypla, Mpesa etc)
  - Add Authorization using cancancan
  - Documentation using Rswag
+ - 
 
 ## Built With
 - Ruby on Rails
