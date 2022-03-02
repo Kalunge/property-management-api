@@ -1,5 +1,5 @@
 # property-management-api
-A property management API to help landlords manage their properties, Users can sign up, book for a site/apartment visit and after renting can be added as Tenants. Created using TDD Approach and other core Rails  Best practices such as 
+A property management API to help landlords manage their properties, Users can sign up, book for a site/apartment visit and after renting can be added as Tenants. Created using TDD Approach and other core Rails Best practices that includes;
 - TDD Approach => Request tests, Controller tests ....
 - Exception Handling via custom errorHandlers inheriting from StandardError
 - Endpoints protection 
